@@ -3,6 +3,7 @@ import random  # to choose a random value from a list, random module or secrets 
 
 # random.choice(mylist) or secrets.choice(mylist)
 
+# noinspection PyShadowingNames
 class Player:
 
     # Assign a default value to the human marker and True if the player is a human user.
@@ -36,13 +37,13 @@ class Player:
         # Here we generate random move from 1-3 rows and A-C columns
         row = random.choice([1, 2, 3])  # or random.randint(1, 4)
         col = random.choice(['A', 'B', 'C'])  # or secrets.choice()
-        move = str(row) + col
-        print("Computer move (O): ",
-              move)  # !! we can't sum up int and str. so need to convert int -> str. and also use print so user can see the comp choice
+        move = str(row) + col           # !! we can't sum up int and str. so need to convert int -> str. and also use print so user can see the comp choice
+        print("Computer move (O): ", move)
         return move
 
 
 # Now define the board
+# noinspection PyShadowingNames
 class Board:
     # class attributes in UPPERCASE are constants and shouldn't be changed
     EMPTY = 0  # use a symbol to denote an empty cell
@@ -197,8 +198,8 @@ while True:
 
     # repeat the check but now for the computer's move. No need for input validation as it was generated from the data
     if board.is_winner(computer, comp_move[0], comp_move[1]):
-        print("Computer wins")
+        print("The computer wins")
         break
-
-
-
+# So basically the last while loop first checks the user input and if he wins the game is over
+# if not the computer makes the move and if his move was to win, the game is over
+# the loop keeps running until one of two conditions is satisfied.

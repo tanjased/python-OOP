@@ -37,7 +37,8 @@ class Player:
         # Here we generate random move from 1-3 rows and A-C columns
         row = random.choice([1, 2, 3])  # or random.randint(1, 4)
         col = random.choice(['A', 'B', 'C'])  # or secrets.choice()
-        move = str(row) + col           # !! we can't sum up int and str. so need to convert int -> str. and also use print so user can see the comp choice
+        move = str(
+            row) + col  # !! we can't sum up int and str. so need to convert int -> str. and also use print so user can see the comp choice
         print("Computer move (O): ", move)
         return move
 
@@ -74,12 +75,13 @@ class Board:
 
     # this method is defined after is_move_valid()
     def submit_move(self, move, player):
-        if not self.is_move_valid(move):            # ALWAYS add self. when calling other methods.
+        if not self.is_move_valid(move):  # ALWAYS add self. when calling other methods.
             print("Invalid input. Format example - '1A'. ")
             return  # !!! not sure. Because we want to end the function. That's the way. AA it returns FALSE and automatically ends
         else:
-            row_index = int(move[0]) - 1        # move is str (input). we define index position in the list, which are 0, 1, 2
-            col_index = Board.COLUMNS[move[1]]  # first i put self.COLUMNS, which is not right as it calls the instance while it's a class attr
+            row_index = int(move[0]) - 1  # move is str (input). we define index position in the list, which are 0, 1, 2
+            col_index = Board.COLUMNS[move[
+                1]]  # first i put self.COLUMNS, which is not right as it calls the instance while it's a class attr
             # retrieve value el from a 2 dim list
             value = self.game_board[row_index][col_index]
             # if the value is EMPTY (zero), it means that the cell is empty and we can set player's marker there
@@ -105,7 +107,7 @@ class Board:
             return True
         elif self.check_antidiagonal(player):
             return True
-        else:               # this means player hasn't won the game
+        else:  # this means player hasn't won the game
             return False
 
     # So these are: check row, check column, check diagonal, check antidiagonal
@@ -159,9 +161,18 @@ class Board:
         #   1       1
         #   2       0
         for i in range(3):
-            if self.game_board[i][2-i] == player.marker:
+            if self.game_board[i][2 - i] == player.marker:
                 total_markers += 1
         if total_markers == 3:
+            return True
+        else:
+            return False
+
+    def check_tie(self):
+        total_empty = 0
+        for row in self.game_board:
+            total_empty += row.count(Board.EMPTY)
+        if total_empty == 0:
             return True
         else:
             return False
@@ -200,6 +211,10 @@ while True:
     if board.is_winner(computer, comp_move[0], comp_move[1]):
         print("The computer wins")
         break
+    if board.check_tie():
+        print("There was a tie!")
+        break
+
 # So basically the last while loop first checks the user input and if he wins the game is over
 # if not the computer makes the move and if his move was to win, the game is over
 # the loop keeps running until one of two conditions is satisfied.

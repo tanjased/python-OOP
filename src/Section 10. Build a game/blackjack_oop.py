@@ -58,10 +58,29 @@ class Deck:
 
 
 class Player:
-    def __init__(self, name, hand, is_dealer=False):
+    def __init__(self, name, is_dealer=False):
         self._name = name
-        self._hand = hand
+        self._hand = []     # this list is going to contain instances of Card class.
+                            # !! again. we define the hand (list of cards) as an empty list. so no need to put in (self, ...)
         self._is_dealer = is_dealer
+
+    @property
+    def name(self):     # read only property as we don't want to change the name after the instance's created
+        return self._name
+
+    @property
+    def is_dealer(self):
+        return self._is_dealer
+
+    # We don't create getters/setters for hand as we don't want to provide access to hand, it will be done by methods
+    def draw(self, deck):                # make it through a new var, not Deck.draw() class reference
+        self._hand.append(deck.draw())   # deck.draw() will be replaced by an instance of card
+        return self     # return the reference to the instance that is calling the method
+
+    def show_hand(self, reveal_card=False):      # True if the card of the dealer should be revealed. If the player that called the method is not the dealer, this value has no effect.
+        if self._is_dealer:
+            self._hand.show()
+        if not self._is_dealer:
 
 
 

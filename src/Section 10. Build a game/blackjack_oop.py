@@ -79,8 +79,23 @@ class Player:
 
     def show_hand(self, reveal_card=False):      # True if the card of the dealer should be revealed. If the player that called the method is not the dealer, this value has no effect.
         if self._is_dealer:
-            self._hand.show()
-        if not self._is_dealer:
+            for card in self._hand:
+                card.show()
+        else:       # when player is the dealer
+            for i in range(len(self._hand)-1):      # because we want to hide the last card in the hand
+                self._hand[i].show()
+            if reveal_card:
+                self._hand[-1].show()
+            else:
+                print("Print a symbol to hide the card. X")
+
+    def discard(self):
+        return self._hand.pop()
+
+    def get_hand_value(self):
+        value = 0
+        for card in self._hand:
+            value += card.value
 
 
 

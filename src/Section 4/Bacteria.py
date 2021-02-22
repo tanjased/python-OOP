@@ -53,40 +53,27 @@ Spirilli = Bacteria("spiral-shaped", "small", "Spirilli", "blue", "spirillum")
 #         if isinstance(new_brand, str):
 #             self._brand = new_brand      
 
-class BouncyBall:
-    def __init__(self, price, size, brand):
-        self._price = price
-        self._size = size
-        self._brand = brand
-
-    def get_price(self):
-        return self._price
-
-    def set_price(self, new_price):
-        if 0 < new_price < 500:
-            self._price = new_price
-
-    price = property(get_price, set_price)        
-
-    def get_size(self):
-        return self._size
-
-    def set_size(self, new_size):
-        if isinstance(new_size, str):
-            self._size = new_size   
-
-    size = property(get_size, set_size)   
-            
-    def get_brand(self):
-        return self._brand
-
-    def set_brand(self, new_brand):
-        if isinstance(new_brand, str):
-            self._brand = new_brand             
-
-    brand = property(get_brand, set_brand)
-
-ball = BouncyBall(370, "M", "Volley")
-ball.brand = "Yamaha"
-print(ball.brand)       
+a = [7, 3, 6, 8, 2, 3, 7, 2, 6, 3, 6]
+b = a
+c = b
+b = c
+ 
+def remove_elem(data, target):
+	new_data = data[:]
+	for item in data:
+		if item == target:
+			new_data.remove(target)
+	return new_data
+ 
+def get_product(data):
+	new_data = data[:]
+	total = 1
+	for i in range(len(data)):
+		total *= new_data.pop()
+	return total
+ 
+remove_elem(c, 3)
+print(get_product(b))
+print(a)  
+     
 

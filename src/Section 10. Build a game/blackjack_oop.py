@@ -78,7 +78,8 @@ class Player:
         self._hand.append(deck.draw())  # deck.draw() will be replaced by an instance of card
         return self  # return the reference to the instance that is calling the method. METHOD CHAINING. so the method can be called a few times
 
-    def show_hand(self, reveal_card=False):  # True if the card of the dealer should be revealed. If the player that called the method is not the dealer, this value has no effect.
+    def show_hand(self,
+                  reveal_card=False):  # True if the card of the dealer should be revealed. If the player that called the method is not the dealer, this value has no effect.
         if not self._is_dealer:
             for card in self._hand:
                 card.show()
@@ -97,7 +98,8 @@ class Player:
         value = 0
         for card in self._hand:
             value += card.value
-        return value   # !!!! here was the error
+        return value  # !!!! here was the error
+
 
 # The complete logic of the game
 class CardGame:
